@@ -1,0 +1,45 @@
+﻿@page "/"
+
+<ol>
+    <li>Open the dev tools</li>
+    <li>Make sure that Sensors >> Touch >> Force Enabled</li>
+    <li>Toggle device toolbar</li>
+    <li>Set to iPad Air</li>
+    <li>Group by any column</li>
+    <li>Reorder a column</li>
+    <li>You can no longer scroll the page by touch</li>
+</ol>
+<div class="m-3">
+    <SfGrid DataSource="@Orders" Height="1400" AllowGrouping="true" AllowReordering="true">
+        <GridColumns>
+            <GridColumn Field=@nameof(Order.OrderId)  HeaderText="Order ID" Width="120"></GridColumn>
+            <GridColumn Field=@nameof(Order.CustomerId) HeaderText="Customer ID" Width="100"></GridColumn>
+            <GridColumn Field=@nameof(Order.OrderDate) HeaderText="Order Date" Width="100"></GridColumn>
+
+        </GridColumns>
+    </SfGrid>
+</div>
+
+@code{
+    private List<Order> Orders;
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var orders = new List<Order>();
+
+        for (var x = 1; x < 50; x++)
+        {
+            orders.Add(new Order
+                {
+                    CustomerId = x * 2,
+                    OrderId = x,
+                    OrderDate = DateTime.Now.AddDays(x)
+                });
+        }
+
+        Orders = orders;
+    }
+
+}
